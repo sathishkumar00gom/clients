@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 import "./Registration.css"
+import axios from "axios";
 
 const Registration = () => {
     const [datas, setDatas] = useState("")
@@ -16,6 +17,15 @@ const Registration = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         console.log("dae", datas)
+        axios
+            .post("http://localhost:3003", datas)
+            .then((res) => {
+                console.log(res, "signuppost")
+            })
+            .catch((err) => {
+                console.log(err, "error")
+            })
+
     }
     return (
         <>
