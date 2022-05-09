@@ -14,11 +14,11 @@ const Registration = () => {
         })
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
         console.log("dae", datas)
-        axios
-            .post("http://localhost:3003", datas)
+        await axios
+            .post("http://localhost:3003/signup", datas)
             .then((res) => {
                 console.log(res, "signuppost")
             })

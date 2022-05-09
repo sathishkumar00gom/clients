@@ -19,7 +19,7 @@
 }
 .button {
   margin-top: 50px;
-  width: 50vh;
+  width: 100%;
   height: 30px;
   border-radius: 50px;
   background-color: black;
@@ -28,11 +28,12 @@
 
 .button-2 {
   margin-top: 5px;
-  width: 20vh;
+  width: 25%;
   height: 30px;
   border-radius: 50px;
   background-color: black;
   color: white;
+  margin-left: 6rem;
 }
 .signupusing {
   margin-top: 20px;
