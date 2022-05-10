@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 import "./Registration.css"
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Registration = () => {
+    const navigate = useNavigate()
     const [datas, setDatas] = useState("")
 
 
@@ -18,13 +20,14 @@ const Registration = () => {
         e.preventDefault()
         console.log("dae", datas)
         await axios
-            .post("http://localhost:3003/signup", datas)
+            .post("http://localhost:3024/signup", datas)
             .then((res) => {
                 console.log(res, "signuppost")
             })
             .catch((err) => {
                 console.log(err, "error")
             })
+        navigate("/login")
 
     }
     return (

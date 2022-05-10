@@ -3,9 +3,11 @@ import { Form } from "react-bootstrap";
 import "./Login.css"
 import axios from "axios";
 import TokenService from "./Services/servicetoken";
-import api from "instance"
+
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+    const navigate = useNavigate()
     const [data, setData] = useState("")
 
 
@@ -19,7 +21,7 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         await axios
-            .post("http://localhost:3003/Login", data)
+            .post("http://localhost:3024/Login", data)
             .then((res) => {
                 console.log(res, "signuppost")
                 TokenService.setAccessToken(res.data.accessToken)
@@ -28,32 +30,15 @@ const Login = () => {
             .catch((err) => {
                 console.log(err, "error")
             })
-    }
-
-    const authHeader = () => {
-        const user = TokenService.getAccessToken()
-        if (user) {
-            return { 'x-access-token': user };
-        } else {
-            return {};
-        }
-    }
-    const getallTours = async () => {
-        try {
-            return await api.get("/gettours", { headers: authHeader() }).then((res) => {
-                return res.data
-            })
-                .catch((err) => {
-                    console.log("INISDE THEN GETTOUR ==>", err.response.data.message)
-                    return err;
-                })
-        }
-        catch (e) {
-            console.log("OUTSIDE CATCH GETTOUR===>", e)
-        }
+        navigate("/Home")
     }
 
 
+
+
+    const handle2Submit = () => {
+        navigate("/Registration")
+    }
 
 
     return (
@@ -85,7 +70,7 @@ const Login = () => {
                         <img className="img" src="https://pbs.twimg.com/profile_images/1455185376876826625/s1AjSxph_400x400.jpg" alt="google"></img>
                     </div>
                     <div className="orsignupusing">or signup using</div>
-                    <button className="button-2">SIGN UP</button>
+                    <button onClick={handle2Submit} className="button-2">SIGN UP</button>
                 </Form>
             </div>
         </>

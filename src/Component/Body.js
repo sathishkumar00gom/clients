@@ -53,7 +53,6 @@ export default function Body() {
                 </Carousel.Item>
 
             </Carousel>
-            )
             <Body2 />
 
         </>
