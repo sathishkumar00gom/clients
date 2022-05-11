@@ -20,7 +20,7 @@ const Registration = () => {
         e.preventDefault()
         console.log("dae", datas)
         await axios
-            .post("http://localhost:3024/signup", datas)
+            .post("http://localhost:3026/signup", datas)
             .then((res) => {
                 console.log(res, "signuppost")
             })

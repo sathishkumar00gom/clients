@@ -8,7 +8,11 @@ import { useNavigate } from "react-router-dom";
 
 const Login = () => {
     const navigate = useNavigate()
-    const [data, setData] = useState("")
+    const [data, setData] = useState({
+        email: "",
+        password: ""
+
+    })
 
 
     const handleChange = (e) => {
@@ -21,7 +25,7 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         await axios
-            .post("http://localhost:3024/Login", data)
+            .post("http://localhost:3026/Login", data)
             .then((res) => {
                 console.log(res, "signuppost")
                 TokenService.setAccessToken(res.data.accessToken)
@@ -52,7 +56,7 @@ const Login = () => {
                         Email
                     </Form.Label>
                     <Form.Control type="text" placeholder="email" onChange={handleChange}
-                        name="username" value={data.email}>
+                        name="email" value={data.email}>
 
                     </Form.Control>
 

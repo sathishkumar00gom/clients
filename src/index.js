@@ -1,25 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import axios from "axios";
 import TokenService from "./Component/Services/servicetoken";
-const instance = axios.create({
-  baseURL: "https://localhost:3024",
+axios.create({
+  baseURL: "https://localhost:3026",
   headers: {
     "Content-Type": "application/json",
   },
 })
-instance.interceptors.request.use((request, _response) => {
+axios.interceptors.request.use((request, _response) => {
 
   const token = TokenService.getAccessToken()
   request.headers = { "x-access-token": token, "Content-Type": "application/json" }
   return request
 })
 
-instance.interceptors.response.use(
+axios.interceptors.response.use(
   (res) => {
     console.log("hai", res)
     return res;
@@ -34,14 +33,14 @@ instance.interceptors.response.use(
           console.log("okay", err.response.data.message)
           let refresh = TokenService.getRefreshToken()
           console.log("1 hour refresh", refresh)
-          const res = await instance.post("/refresh", {
+          const res = await axios.post("http://localhost:3026/refresh", {
             "x-access-token": refresh,
             'content-type': 'application/json'
           });
           console.log("response===>", res?.data?.data?.token)
           TokenService.UpdateAccessToken(res?.data?.data?.token)
-          instance.defaults.headers.common["x-access-token"] = res?.data?.data?.token;
-          return instance(originalConfig);
+          axios.defaults.headers.common["x-access-token"] = res?.data?.data?.token;
+          return axios(originalConfig);
         } catch (_error) {
           return Promise.reject(_error);
         }

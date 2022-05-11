@@ -1,7 +1,14 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import Carousel from './Carousel'
 
 export default function Home() {
+    const navigate = useNavigate()
+
+
+    const handleSubmit = () => {
+        navigate("/login")
+    }
     return (
         <>
             <nav className="navbar navbar-expand-lg navbar-light bg-dark">
@@ -27,7 +34,7 @@ export default function Home() {
                     <form className="form-inline my-2 my-lg-0">
                         <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
                         <button className="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
-                        <div className="nav-link p-3" type="button" href="#" style={{ color: "white" }}>Login</div>
+                        <div className="nav-link p-3" type="button" onClick={handleSubmit} href="#" style={{ color: "white" }}>Logout</div>
                     </form>
                 </div>
             </nav >
